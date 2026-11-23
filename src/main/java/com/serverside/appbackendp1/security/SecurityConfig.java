@@ -25,7 +25,18 @@ public class SecurityConfig {
     public SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception {
         http
                 .authorizeHttpRequests(auth -> auth
-                        .requestMatchers("/login", "/logout", "/error", "/css/**", "/favicon.ico").permitAll()
+                        .requestMatchers(
+                                        "/login",
+                                        "/logout",
+                                        "/error",
+                                        "/css/**",
+                                        "/favicon.ico",
+                                        "/v3/api-docs/**",
+                                        "/swagger-ui/**",
+                                        "/swagger-ui.html"
+                        ).permitAll()
+                        // Endpoints REST públicos
+                        .requestMatchers(HttpMethod.GET, "/api/autores", "/api/libros").permitAll()
                         .requestMatchers(HttpMethod.GET, "/*/nuevo", "/*/*/editar").hasRole("ADMIN")
                         .requestMatchers(HttpMethod.POST, "/**").hasRole("ADMIN")
                         .anyRequest().authenticated())
