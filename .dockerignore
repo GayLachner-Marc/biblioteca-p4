@@ -1,0 +1,14 @@
+target/
+.git/
+docs/
+.idea/
+*.iml
+.vscode/
+
+# Archivos locales y secretos
+.env
+.env.*
+!.env.example
+
+# Backups, migraciones y scripts SQL
+*.sql
